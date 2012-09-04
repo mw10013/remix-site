@@ -1,6 +1,6 @@
-(ns heroku-sandbox.web
+(ns remix-site.web
   (:use [ring.adapter.jetty :only [run-jetty]])
-  (:require [heroku-sandbox.app :as app]))
+  (:require [remix-site.app :as app]))
 
 (defn -main []
   (let [port (Integer/parseInt (System/getenv "PORT"))]
