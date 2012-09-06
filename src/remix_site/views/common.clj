@@ -7,7 +7,7 @@
   (html5 {:lang :en}
    [:head
     [:meta {:charset :utf-8}]
-    [:title "Heroku Sandbox"]
+    [:title "Remix"]
     [:meta {:name :viewport :content "width=device-width, initial-scale=1.0"}]
     (include-css "/css/bootstrap.css")
     [:style {:type "text/css"} "
@@ -43,5 +43,3 @@ body {
      [:p "Mix and match machinery for web and sql."]
      [:p (link-to {:class "btn btn-primary btn-large"} "#" "Learn more &raquo;")]]]))
 
-
-(defrh "/page" [] (layout nil))
