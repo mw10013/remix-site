@@ -1,12 +1,21 @@
 (ns remix-site.views.validate
   (:use [remix [rhandler :only [defrh]] [validate :only [invalid?]]]
         [hiccup [core :only [html h]] [page :only [html5 include-css include-js]]
-         [element :only [link-to]]
+         [def :only [defhtml]] [element :only [link-to]]
          [form :only [form-to submit-button label text-field password-field]]]
-        [remix-site.views.common :only [layout]]))
+        [remix-site.views.common :only [layout]]
+        [clojure.string :only [join blank?]]))
+
+(declare clj-snippet)
+
+(defmacro control-group [k label errors & body]
+  `[(if (~k ~errors) :div.control-group.error :div.control-group)
+    (label {:class :control-label :for ~k} ~k ~label)
+    [:div.controls
+     ~@body
+     (when (~k ~errors) [:span.help-inline (join \space (~k ~errors))])]])
 
 (defrh validate "/validate" {:keys [params flash errors] :as req}
-  (println params)
   (layout
    [:div.container
     [:div.page-header
@@ -15,29 +24,27 @@
     (when flash (html [:div.alert.alert-success.fade.in
                        [:button.close {:type :button :data-dismiss :alert} "x"]
                        flash]))
-    [:pre.prettyprint.lang-clj.linenums "
-(ns remix-site.views.validate
-  (:use [remix.validate :only [invalid?]])
-"]
+    (clj-snippet)
     (form-to {:class :form-horizontal} [:post "/validate-postback"]
              [:legend "Validate form example"]
-             [(if (:name errors) :div.control-group.error :div.control-group)
-              (label {:class :control-label :for :name} :name "Name")
-              [:div.controls
-               (text-field :name (:name params))
-               (when (:name errors) [:span.help-inline (clojure.string/join \space (:name errors))])]]
-             [:div.control-group
-              (label {:class :control-label :for :pw} :pw "Password")
-              [:div.controls
-               (password-field :pw)]]
-             [:div.control-group
-              (label {:class :control-label :for :confirm} :confirm "Confirm Password")
-              [:div.controls
-               (password-field :confirm)]]
+             (control-group :name "Name" errors (text-field :name (:name params)))
+             (control-group :password "Password" errors (password-field :password (:password params)))
+             (control-group :confirm-password "Confirm Password" errors (password-field :confirm-password (:confirm-password params)))
+             (control-group :fav-num "Favorite Number" errors (text-field :fav-num (:fav-num params)))
              [:div.form-actions
               (submit-button {:class "btn btn-primary"} "Submit")])]))
 
 (defrh :post "/validate-postback" {:keys [params] :as req}
-  (if-let [errors (invalid? params [:name (complement clojure.string/blank?) "Required."])]
+  (if-let [errors (invalid? params
+                            [:name (complement blank?) "Required."]
+                            [[:password (complement blank?) "Required."]
+                             [:confirm-password (complement blank?) "Required."]
+                             [identity :password #(apply = (map % [:password :confirm-password])) "Passwords must match."]]
+                            [:fav-num #(or (blank? %) (try (Double. %) (catch Exception e false))) "Invalid number."])]
     (validate (assoc req :errors errors))
-    (validate (assoc req :errors nil :flash "Validated"))))
+    (validate (assoc req :errors nil :flash "Valid."))))
+
+(defhtml clj-snippet []
+  [:pre.prettyprint.lang-clj.linenums "
+(ns remix-site.views.validate
+  (:use [remix.validate :only [invalid?]]))"])
