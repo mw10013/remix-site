@@ -15,6 +15,10 @@
     (when flash (html [:div.alert.alert-success.fade.in
                        [:button.close {:type :button :data-dismiss :alert} "x"]
                        flash]))
+    [:pre.prettyprint.lang-clj.linenums "
+(ns remix-site.views.validate
+  (:use [remix.validate :only [invalid?]])
+"]
     (form-to {:class :form-horizontal} [:post "/validate-postback"]
              [:legend "Validate form example"]
              [(if (:name errors) :div.control-group.error :div.control-group)

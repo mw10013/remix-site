@@ -16,12 +16,12 @@ body {
   padding-bottom: 40px;
 }
 "]
-    (include-css "/css/bootstrap-responsive.css")"
+    (include-css "/css/bootstrap-responsive.css" "/css/prettify.css")"
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
   <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
 <![endif]-->"]
-   [:body
+   [:body {:onload "prettyPrint()"}
     [:div.navbar.navbar-inverse.navbar-fixed-top
      [:div.navbar-inner
       [:div.container
@@ -33,7 +33,7 @@ body {
          [:li.active (link-to "#home" "Home")]
          [:li (link-to "#about" "About")]]]]]]
     content]
-   (include-js "js/jquery.js" "js/bootstrap.js")))
+   (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")))
 
 (defrh "/" []
   (layout
