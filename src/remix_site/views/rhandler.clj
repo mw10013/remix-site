@@ -3,7 +3,7 @@
         [hiccup [def :only [defhtml]] [element :only [link-to]]]
         [remix-site.views.common :only [layout link-to-ring link-to-compojure link-to-noir]]))
 
-(declare wrap-rhandler-snippet)
+(declare wrap-rhandler-snippet defrh-snippet)
 
 (defrh "/rhandler" []
   (layout
