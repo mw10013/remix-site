@@ -37,7 +37,8 @@ body {
         [:ul.nav
          #_[:li.active (link-to "#home" "Home")]
          [:li (link-to "/rhandler" "rhandler")]
-         [:li (link-to "/validate" "validate")]]]]]]
+         [:li (link-to "/validate" "validate")]
+         [:li (link-to "/nested-params" "nested-params")]]]]]]
     content]
    (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")))
 

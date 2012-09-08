@@ -10,7 +10,7 @@
    [:div.container
     [:div.page-header
      [:h1 "rhandler " [:small "Remixed from " (link-to-noir)]]]
-    [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/rhandler.clj" "Machinery ") "to define/re-define
+    [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/rhandler.clj" "Machinery") " to define/re-define
 route handlers on top of " (link-to-compojure)  "."]
     [:div.row
      [:div.span6
@@ -28,7 +28,8 @@ the route handler programatically."]
      [:li [:code "bindings"] " follow Composure's "
       (link-to "https://github.com/weavejester/compojure/wiki/Destructuring-Syntax" "destructuring syntax") "."]
      [:li [:code "body"] " should return the handler's response."]]
-    [:h2 "Examples"]
+    [:span.label.label-info "Note"] " " (link-to-noir) " goes much further and is generally recommended. If you decide not to use Noir, but want lightweight machinery to define/redefine route handlers, then rhandler is available for remixing."
+    [:h2 "Example"]
     (defrh-snippet)]))
 
 (defhtml wrap-rhandler-snippet []

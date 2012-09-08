@@ -30,7 +30,7 @@
   (layout
    [:div.container
     [:div.page-header
-     [:h1 "Validate " [:small "Remixed from " (link-to-valip)]]]
+     [:h1 "validate " [:small "Remixed from " (link-to-valip)]]]
     [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/validate.clj" "Machinery ") "to validate a map."]
     [:p [:code "(invalid? map & rules)"] " validates map against rules returning a map of errors or nil."]
     [:p "Rules are vectors"
