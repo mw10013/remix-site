@@ -27,7 +27,9 @@ the route handler programatically."]
       (link-to "https://github.com/weavejester/compojure/wiki/Routes-In-Detail" "match against the URI") "."]
      [:li [:code "bindings"] " follow Composure's "
       (link-to "https://github.com/weavejester/compojure/wiki/Destructuring-Syntax" "destructuring syntax") "."]
-     [:li [:code "body"] " should return the handler's response."]]]))
+     [:li [:code "body"] " should return the handler's response."]]
+    [:h2 "Examples"]
+    (defrh-snippet)]))
 
 (defhtml wrap-rhandler-snippet []
   [:pre.prettyprint.lang-clj"
@@ -35,3 +37,23 @@ the route handler programatically."]
   (:use [remix.rhandler :only [wrap-rhandler]]))
 
 (def app (-> routes (wrap-rhandler 'remix-site.views) site))"])
+
+(defhtml defrh-snippet []
+  [:pre.prettyprint.lang-clj"
+(ns remix-site.views.rhandler
+  (:use [remix.rhandler :only [defrh]]))
+
+; Named :get handler.
+(defrh form-handler \"/form\" {:keys [errors]}
+  (form-to [:post \"/form-postback\"]
+           (when errors errors)
+           (text-field :field)
+           (submit-button \"Submit\")))
+
+; Anonymous handler that calls form-handler.
+(defrh :post \"/form-postback\" {:keys [params] :as request}
+  (if-let [errors (invalid? params
+                            [:field (complement blank?) \"Required.\"])]
+    (form-handler (assoc request :errors errors))
+    (form-handler (assoc request :errors nil))))"])
+  
