@@ -1,9 +1,8 @@
 (ns remix-site.views.validate
   (:use [remix [rhandler :only [defrh]] [validate :only [invalid?]]]
-        [hiccup [core :only [html h]] [page :only [html5 include-css include-js]]
-         [def :only [defhtml]] [element :only [link-to]]
+        [hiccup [core :only [html]] [def :only [defhtml]] [element :only [link-to]]
          [form :only [form-to submit-button label text-field password-field]]]
-        [remix-site.views.common :only [layout]]
+        [remix-site.views.common :only [layout link-to-valip]]
         [clojure.string :only [join blank?]]))
 
 (declare clj-snippet)
@@ -17,7 +16,6 @@
 
 (defhtml form [params errors flash]
   (form-to {:class :form-horizontal} [:post "/validate-postback"]
-             [:legend "Kick the Tires"]
              (when flash (html [:div.alert.alert-success.fade.in
                        [:button.close {:type :button :data-dismiss :alert} "x"]
                        flash]))
@@ -32,8 +30,7 @@
   (layout
    [:div.container
     [:div.page-header
-     [:h1 "Validate " [:small "with apologies to "
-                       (link-to "https://github.com/weavejester/valip" "valip")]]]
+     [:h1 "Validate " [:small "Remixed from " (link-to-valip)]]]
     [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/validate.clj" "Machinery ") "to validate a map."]
     [:p [:code "(invalid? map & rules)"] " validates map against rules returning a map of errors or nil."]
     [:p "Rules are vectors"
@@ -44,8 +41,9 @@
 If " [:code "predicate"] " returns falsy, " [:code "error"] " is added to the error map " [:code "{key [error]}"] ". If "
      [:code "val-fn"] " is specified, it takes the map to be validated and the result is passed to " [:code "predicate"] "."]
     [:p "A rule can also be a collection containing rules and the first invalid rule gets its " [:code "error"] " into the error map."]
+    [:h2 "Kick the Tires"]
     (form params errors flash)
-    [:h2 (link-to "https://github.com/mw10013/remix-site/blob/master/src/remix_site/views/validate.clj" "Example")]
+    [:h2 (link-to "https://github.com/mw10013/remix-site/blob/master/src/remix_site/views/validate.clj" "Code Behind")]
     (clj-snippet)]))
 
 (defrh :post "/validate-postback" {:keys [params] :as req}

@@ -3,6 +3,11 @@
         [hiccup [page :only [html5 include-css include-js]]
          [element :only [link-to]]]))
 
+(defn link-to-ring [] (link-to "https://github.com/ring-clojure/ring" "Ring"))
+(defn link-to-compojure [] (link-to "https://github.com/weavejester/compojure" "Compojure"))
+(defn link-to-noir [] (link-to "https://github.com/noir-clojure/noir" "Noir"))
+(defn link-to-valip [] (link-to "https://github.com/weavejester/valip" "Valip"))
+
 (defn layout [content]
   (html5 {:lang :en}
    [:head
@@ -27,11 +32,12 @@ body {
       [:div.container
        [:a.btn.btn-navbar {:data-toggle :collapse :data-target :.nav-collapse}
         (repeat 3 [:span.icon-bar])]
-       (link-to {:class :brand} "#" "Remix")
+       (link-to {:class :brand} "/" "Remix")
        [:div.nav-collapse.collapse
         [:ul.nav
-         [:li.active (link-to "#home" "Home")]
-         [:li (link-to "#about" "About")]]]]]]
+         #_[:li.active (link-to "#home" "Home")]
+         [:li (link-to "/rhandler" "rhandler")]
+         [:li (link-to "/validate" "validate")]]]]]]
     content]
    (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")))
 
