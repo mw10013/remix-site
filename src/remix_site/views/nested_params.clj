@@ -1,5 +1,6 @@
 (ns remix-site.views.nested-params
-  (:use [remix [rhandler :only [defrh]]]
+  (:use [clojure.pprint :only [pprint]]
+        [remix [rhandler :only [defrh]]]
         [hiccup [core :only [html h]] [def :only [defhtml]] [element :only [link-to]]
          [form :only [form-to submit-button label text-field]]]
         [remix-site.views.common :only [layout link-to-ring clj-snippet]]))
@@ -17,8 +18,7 @@
            (when (:as params)
              (html [:div.alert.alert-info.fade.in
                     [:button.close {:type :button :data-dismiss :alert} "x"]
-                    (clj-snippet (-> params (select-keys [:as]) clojure.pprint/pprint with-out-str))
-                    #_[:pre (-> params (select-keys [:as]) clojure.pprint/pprint with-out-str h)]]))
+                    (clj-snippet (-> params (select-keys [:as]) pprint with-out-str))]))
            (field [:as 0 :id] params)
            (field [:as 0 :bs 0 :id] params)
            (field [:as 0 :bs 1 :id] params)
