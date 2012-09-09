@@ -64,9 +64,7 @@ which will be treated as indexes into nested vectors. If any levels do not exist
                wrap-params))"))
 
 (defn- degenerate-case-snippet []
-  (clj-snippet "
-(use 'ring.middleware.nested-params)
+  (clj-snippet "(use 'ring.middleware.nested-params)
 (def handler (wrap-nested-params :params))
 (handler {:params {\"[:as 0 :id]\" \"bar\"}})
-; {\"\" {\":as 0 :id\" \"bar\"}}
-"))
+; {\"\" {\":as 0 :id\" \"bar\"}}"))
