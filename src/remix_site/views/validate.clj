@@ -2,10 +2,10 @@
   (:use [remix [rhandler :only [defrh]] [validate :only [invalid?]]]
         [hiccup [core :only [html]] [def :only [defhtml]] [element :only [link-to]]
          [form :only [form-to submit-button label text-field password-field]]]
-        [remix-site.views.common :only [layout link-to-valip]]
+        [remix-site.views.common :only [layout link-to-valip clj-snippet]]
         [clojure.string :only [join blank?]]))
 
-(declare clj-snippet)
+(declare validate-snippet)
 
 (defmacro control-group [k label errors & body]
   `[(if (~k ~errors) :div.control-group.error :div.control-group)
@@ -44,7 +44,7 @@ If " [:code "predicate"] " returns falsy, " [:code "error"] " is added to the er
     [:h2 "Kick the Tires"]
     (form params errors flash)
     [:h2 (link-to "https://github.com/mw10013/remix-site/blob/master/src/remix_site/views/validate.clj" "Code Behind")]
-    (clj-snippet)]))
+    (validate-snippet)]))
 
 (defrh :post "/validate-postback" {:keys [params] :as req}
   (if-let [errors (invalid? params
@@ -56,8 +56,8 @@ If " [:code "predicate"] " returns falsy, " [:code "error"] " is added to the er
     (validate (assoc req :errors errors))
     (validate (assoc req :errors nil :flash "Valid."))))
 
-(defhtml clj-snippet []
-  [:pre.prettyprint.lang-clj"
+(defn- validate-snippet []
+  (clj-snippet "
 (ns remix-site.views.validate
   (:use [remix.validate :only [invalid?]]))
 
@@ -73,4 +73,4 @@ If " [:code "predicate"] " returns falsy, " [:code "error"] " is added to the er
                                            (try (Double. %) (catch Exception _ false)))
                              \"Invalid number.\"])]
     (validate (assoc req :errors errors))
-    (validate (assoc req :errors nil :flash \"Valid.\"))))"])
+    (validate (assoc req :errors nil :flash \"Valid.\"))))"))

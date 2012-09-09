@@ -1,7 +1,7 @@
 (ns remix-site.views.common
   (:use [remix.rhandler :only [defrh]]
-        [hiccup [page :only [html5 include-css include-js]]
-         [element :only [link-to]]]))
+        [hiccup [core :only [h]] [page :only [html5 include-css include-js]]
+         [def :only [defhtml]] [element :only [link-to]]]))
 
 (defn link-to-ring [] (link-to "https://github.com/ring-clojure/ring" "Ring"))
 (defn link-to-compojure [] (link-to "https://github.com/weavejester/compojure" "Compojure"))
@@ -41,6 +41,8 @@ body {
          [:li (link-to "/nested-params" "nested-params")]]]]]]
     content]
    (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")))
+
+(defhtml clj-snippet [s] [:pre.prettyprint.lang-clj (h s)])
 
 (defrh "/" []
   (layout

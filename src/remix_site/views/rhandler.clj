@@ -1,7 +1,7 @@
 (ns remix-site.views.rhandler
   (:use [remix [rhandler :only [defrh]]]
         [hiccup [def :only [defhtml]] [element :only [link-to]]]
-        [remix-site.views.common :only [layout link-to-ring link-to-compojure link-to-noir]]))
+        [remix-site.views.common :only [layout link-to-ring link-to-compojure link-to-noir clj-snippet]]))
 
 (declare wrap-rhandler-snippet defrh-snippet)
 
@@ -14,7 +14,7 @@
 route handlers on top of " (link-to-compojure)  "."]
     [:div.row
      [:div.span6
-      [:p "Use " [:code "(wrap-rhandler handler & ns-syms)"] " middleware to hook rhandler's into " (link-to-ring) ".
+      [:p "Use " [:code "(wrap-rhandler handler & ns-syms)"] "middleware to hook rhandler's into " (link-to-ring) ".
 ns-syms should refer to namespaces and they and their children are required."]]
      [:div.span6 (wrap-rhandler-snippet)]]
     [:p "Define a route handler with " [:code "(defrh name? method? path bindings & body)"] "."]
@@ -32,15 +32,16 @@ the route handler programatically."]
     [:h2 "Example"]
     (defrh-snippet)]))
 
-(defhtml wrap-rhandler-snippet []
-  [:pre.prettyprint.lang-clj"
+(defn- wrap-rhandler-snippet []
+  (clj-snippet "
 (ns remix-site.views.rhandler
   (:use [remix.rhandler :only [wrap-rhandler]]))
 
-(def app (-> routes (wrap-rhandler 'remix-site.views) site))"])
+(def app (-> routes (wrap-rhandler 'remix-site.views)
+             site))"))
 
-(defhtml defrh-snippet []
-  [:pre.prettyprint.lang-clj"
+(defn- defrh-snippet []
+  (clj-snippet "
 (ns remix-site.views.rhandler
   (:use [remix.rhandler :only [defrh]]))
 
@@ -56,5 +57,5 @@ the route handler programatically."]
   (if-let [errors (invalid? params
                             [:field (complement blank?) \"Required.\"])]
     (form-handler (assoc request :errors errors))
-    (form-handler (assoc request :errors nil))))"])
+    (form-handler (assoc request :errors nil))))"))
   
