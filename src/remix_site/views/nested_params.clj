@@ -4,7 +4,7 @@
          [form :only [form-to submit-button label text-field]]]
         [remix-site.views.common :only [layout link-to-ring clj-snippet]]))
 
-(declare wrap-nested-params-snippet)
+(declare wrap-nested-params-snippet degenerate-case-snippet)
 
 (defhtml field [path params]
   [:div.control-group
