@@ -16,9 +16,9 @@
 
 (defhtml form [params errors flash]
   (form-to {:class :form-horizontal} [:post "/validate-postback"]
-             (when flash (html [:div.alert.alert-success.fade.in
-                       [:button.close {:type :button :data-dismiss :alert} "x"]
-                       flash]))
+           (when flash (html [:div.alert.alert-success.fade.in
+                              [:button.close {:type :button :data-dismiss :alert} "x"]
+                              flash]))
              (control-group :name "Name" errors (text-field :name (:name params)))
              (control-group :password "Password" errors (password-field :password (:password params)))
              (control-group :confirm-password "Confirm Password" errors (password-field :confirm-password (:confirm-password params)))
