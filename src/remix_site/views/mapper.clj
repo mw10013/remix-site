@@ -13,16 +13,11 @@
     [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/mapper.clj" "Machinery")
      " to map values of maps and reduce result sets to nested maps"]
     [:div.row
-     [:div.span6
-      [:p "Use " [:code "(wrap-nested-params handler)"] " middleware as a drop-in replacement for nested-params in " (link-to-mybatis) "."]
-      [:p "Extends the nested key syntax by accepting parameter names as vectors of keys. Keys may be keywords or integers,
+     #_[:div.span6
+        [:p "Use " [:code "(wrap-nested-params handler)"] " middleware as a drop-in replacement for nested-params in " (link-to-mybatis) "."]
+        [:p "Extends the nested key syntax by accepting parameter names as vectors of keys. Keys may be keywords or integers,
 which will be treated as indexes into nested vectors. If any levels do not exist, hash-maps and vectors will be created."]
-      [:p "The labels in Kick the Tires below contain examples of this syntax."]]
-     [:div.span6 #_(wrap-nested-params-snippet)]]
-    [:div.row     
-     [:div.span6 #_(degenerate-case-snippet)]
-     [:div.span6
-      [:p [:span.label.label-important "Important"] " Breaks compatibility with ring's nested-params in the degerate case."]]]]))
+        [:p "The labels in Kick the Tires below contain examples of this syntax."]]]]))
 
 (comment
   [clj-time [local :as ltime] [coerce :as ctime]]
