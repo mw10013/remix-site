@@ -46,7 +46,7 @@ which will be treated as indexes into nested vectors. If any levels do not exist
     [:div.row     
      [:div.span6 (degenerate-case-snippet)]
      [:div.span6
-      [:p [:span.label.label-important "Important"] " Breaks compatibility with ring's nested-params in the degerate case."]]]
+      [:p [:span.label.label-important "Important"] " Breaks compatibility with ring's nested-params in the degenerate case."]]]
     [:h2 "Kick the Tires"]
     (form params)]))
 
