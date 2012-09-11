@@ -5,6 +5,8 @@
          [form :only [form-to submit-button label text-field]]]
         [remix-site.views.common :only [layout link-to-mybatis clj-snippet]]))
 
+(declare make-mapping-snippet apply-mappings-snippet)
+
 (defrh mapper "/mapper" []
   (layout
    [:div.container
@@ -13,11 +15,15 @@
     [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/mapper.clj" "Machinery")
      " to map values of maps and reduce result sets to nested maps"]
     [:div.row
-     #_[:div.span6
-        [:p "Use " [:code "(wrap-nested-params handler)"] " middleware as a drop-in replacement for nested-params in " (link-to-mybatis) "."]
-        [:p "Extends the nested key syntax by accepting parameter names as vectors of keys. Keys may be keywords or integers,
-which will be treated as indexes into nested vectors. If any levels do not exist, hash-maps and vectors will be created."]
-        [:p "The labels in Kick the Tires below contain examples of this syntax."]]]]))
+     [:div.span3
+      [:p [:code "(make-mapping f k & ks)"] " returns a function taking a map. For each k, if the corresponding value
+is not nil, passes it to f and updates the map with the result."]]
+     [:div.span9 (make-mapping-snippet)]]
+    [:div.row
+     [:div.span8 (apply-mappings-snippet)]
+     [:div.span4
+      [:p [:code "(apply-mappings mapping-colls+ x)"] " takes one or more collections of mappings and
+applies them against x, which is either a map or collection of maps."]]]]))
 
 (comment
   [clj-time [local :as ltime] [coerce :as ctime]]
@@ -61,4 +67,14 @@ which will be treated as indexes into nested vectors. If any levels do not exist
   )
 
 (defn- make-mapping-snippet []
-  (clj-snippet "("))
+  (clj-snippet "(require '(remix [mapper :as m]))
+(require '(clj-time local coerce))
+(def mapping (m/make-mapping
+              (comp clj-time.coerce/to-timestamp clj-time.local/to-local-date-time)
+              :created :modified))
+(mapping {:created (java.util.Date.) :modified nil})
+; {:created #<Timestamp 2012-09-10 23:40:59.16>, :modified nil}"))
+
+(defn- apply-mappings-snippet []
+  (clj-snippet "(m/apply-mappings [mapping] {:created (java.util.Date.) :modified nil})
+; {:created #<Timestamp 2012-09-10 23:30:08.727>, :modified nil}"))
