@@ -4,4 +4,4 @@
                  [ring/ring "1.1.3"]
                  [ring/ring-jetty-adapter "1.1.3"]
                  [clj-time "0.4.4"]
-                 [org.clojars.mw10013/remix "0.0.1"]])
+                 [org.clojars.mw10013/remix "0.0.2"]])
