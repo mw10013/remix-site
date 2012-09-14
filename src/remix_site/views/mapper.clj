@@ -11,7 +11,7 @@
   (layout
    [:div.container
     [:div.page-header
-     [:h1 "mapper " [:small "Remixed from " (link-to-mybatis)]]]
+     [:h1 "mapper" [:small " Remixed from " (link-to-mybatis)]]]
     [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/mapper.clj" "Machinery")
      " to map values of maps and reduce result sets to nested maps"]
     [:h2 "Mappings"]

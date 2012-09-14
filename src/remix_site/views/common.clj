@@ -42,7 +42,8 @@ body {
          [:li (link-to "/rhandler" "rhandler")]
          [:li (link-to "/validate" "validate")]
          [:li (link-to "/nested-params" "nested-params")]
-         [:li (link-to "/mapper" "mapper")]]]]]]
+         [:li (link-to "/mapper" "mapper")]
+         [:li (link-to "/db" "db")]]]]]]
     content]
    (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")))
 
