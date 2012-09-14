@@ -14,6 +14,7 @@
      [:h1 "mapper " [:small "Remixed from " (link-to-mybatis)]]]
     [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/mapper.clj" "Machinery")
      " to map values of maps and reduce result sets to nested maps"]
+    [:h2 "Mappings"]
     [:div.row
      [:div.span3
       [:p [:code "(make-mapping f k & ks)"] " returns a function taking a map. For each k, if the corresponding value
@@ -30,9 +31,9 @@ applies them against x, which is either a map or collection of maps."]]]
 it makes a mapping for the collection of keys. This is a way to pair up to/from conversion functions.
 Partial up into functions to compose mappings."]
       [:p (make-mappings-snippet)]
+      [:h2 "reduce-rows"]
       [:p "Use " [:code "(reduce-rows template rows)"] " to transform a collection of maps
-into nested maps using a template. Can help with the N+1 selects database problem."]
-      ]]
+into nested maps using a template. Can help with the N+1 selects database problem."]]]
     [:div.row
      [:div.span4
       [:p [:code "template"] " is a nested map with the following keys:"
