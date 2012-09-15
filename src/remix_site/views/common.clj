@@ -43,7 +43,9 @@ body {
          [:li (link-to "/validate" "validate")]
          [:li (link-to "/nested-params" "nested-params")]
          [:li (link-to "/mapper" "mapper")]
-         [:li (link-to "/db" "db")]]]]]]
+         [:li (link-to "/sql" "sql")]
+         [:li (link-to "/db" "db")]
+         [:li (link-to "/dbfn" "dbfn")]]]]]]
     content]
    (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")))
 
