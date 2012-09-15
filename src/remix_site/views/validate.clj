@@ -2,7 +2,7 @@
   (:use [remix [rhandler :only [defrh]] [validate :only [invalid?]]]
         [hiccup [core :only [html]] [def :only [defhtml]] [element :only [link-to]]
          [form :only [form-to submit-button label text-field password-field]]]
-        [remix-site.views.common :only [layout link-to-valip clj-snippet]]
+        [remix-site.views.common :only [layout link-to-valip link-to-remix clj-snippet]]
         [clojure.string :only [join blank?]]))
 
 (declare validate-snippet)
@@ -31,7 +31,7 @@
    [:div.container
     [:div.page-header
      [:h1 "validate " [:small "Remixed from " (link-to-valip)]]]
-    [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/validate.clj" "Machinery ") "to validate a map."]
+    [:p (link-to-remix "validate.clj" "Machinery ") "to validate a map."]
     [:p [:code "(invalid? map & rules)"] " validates map against rules returning a map of errors or nil."]
     [:p "Rules are vectors"
      [:ul

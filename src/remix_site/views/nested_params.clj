@@ -1,9 +1,8 @@
 (ns remix-site.views.nested-params
   (:use [clojure.pprint :only [pprint]]
         [remix [rhandler :only [defrh]]]
-        [hiccup [core :only [html h]] [def :only [defhtml]] [element :only [link-to]]
-         [form :only [form-to submit-button label text-field]]]
-        [remix-site.views.common :only [layout link-to-ring clj-snippet]]))
+        [hiccup [core :only [html h]] [def :only [defhtml]] [form :only [form-to submit-button label text-field]]]
+        [remix-site.views.common :only [layout link-to-ring link-to-remix clj-snippet]]))
 
 (declare wrap-nested-params-snippet degenerate-case-snippet)
 
@@ -34,7 +33,7 @@
    [:div.container
     [:div.page-header
      [:h1 "nested-params " [:small "Remixed from nested-params in " (link-to-ring)]]]
-    [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/middleware/nested_params.clj" "Machinery")
+    [:p (link-to-remix "nested_params.clj" "Machinery")
      " to convert a single-depth map of parameters to a nested map as ring middleware."]
     [:div.row
      [:div.span6

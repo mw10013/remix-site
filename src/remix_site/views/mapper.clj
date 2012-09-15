@@ -1,9 +1,8 @@
 (ns remix-site.views.mapper
   (:use [clojure.pprint :only [pprint]]
         [remix [rhandler :only [defrh]]]
-        [hiccup [core :only [html h]] [def :only [defhtml]] [element :only [link-to]]
-         [form :only [form-to submit-button label text-field]]]
-        [remix-site.views.common :only [layout link-to-mybatis clj-snippet]]))
+        [hiccup [core :only [html h]] [def :only [defhtml]] [form :only [form-to submit-button label text-field]]]
+        [remix-site.views.common :only [layout link-to-mybatis link-to-remix clj-snippet]]))
 
 (declare make-mapping-snippet apply-mappings-snippet make-mappings-snippet reduce-rows-snippet)
 
@@ -12,7 +11,7 @@
    [:div.container
     [:div.page-header
      [:h1 "mapper" [:small " Remixed from " (link-to-mybatis)]]]
-    [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/mapper.clj" "Machinery")
+    [:p (link-to-remix "mapper.clj" "Machinery")
      " to map values of maps and reduce result sets to nested maps"]
     [:h2 "Mappings"]
     [:div.row

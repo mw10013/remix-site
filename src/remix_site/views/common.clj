@@ -1,6 +1,6 @@
 (ns remix-site.views.common
   (:use [remix.rhandler :only [defrh]]
-        [hiccup [core :only [h]] [page :only [html5 include-css include-js]]
+        [hiccup [core :only [html h]] [page :only [html5 include-css include-js]]
          [def :only [defhtml]] [element :only [link-to]]]))
 
 (defn link-to-ring [] (link-to "https://github.com/ring-clojure/ring" "Ring"))
@@ -10,6 +10,7 @@
 (defn link-to-korma [] (link-to "https://github.com/korma/Korma" "Korma"))
 (defn link-to-mybatis [] (link-to "http://www.mybatis.org/core/" "MyBatis"))
 (defn link-to-valip [] (link-to "https://github.com/weavejester/valip" "Valip"))
+(defn link-to-remix [src content] (link-to (str "https://github.com/mw10013/remix/blob/master/src/remix/" src) content))
 
 (defn layout [content]
   (html5 {:lang :en}
@@ -50,6 +51,10 @@ body {
    (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")))
 
 (defhtml clj-snippet [s] [:pre.prettyprint.lang-clj (h s)])
+
+(defn layout-snippets [& args]
+  (for [[p s] (partition 2 args)]
+    (html [:p p] [:p (clj-snippet s)])))
 
 (defrh "/" []
   (layout

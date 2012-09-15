@@ -1,7 +1,7 @@
 (ns remix-site.views.db
   (:use [remix [rhandler :only [defrh]]]
         [hiccup [core :only [html]] [def :only [defhtml]] [element :only [link-to]]]
-        [remix-site.views.common :only [layout link-to-korma link-to-jdbc clj-snippet]]))
+        [remix-site.views.common :only [layout link-to-korma link-to-jdbc link-to-remix clj-snippet]]))
 
 (declare create-db-snippet with-db-snippet)
 
@@ -10,7 +10,7 @@
    [:div.container
     [:div.page-header
      [:h1 "db" [:small " Remixed from " (link-to-korma)]]]
-    [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/db.clj" "Machinery")
+    [:p (link-to-remix "db.clj" "Machinery")
      " to manage database connections with " (link-to "http://www.mchange.com/projects/c3p0/" "c3p0") "."]
     [:div.row
      [:div.span5

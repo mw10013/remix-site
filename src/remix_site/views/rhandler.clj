@@ -1,7 +1,7 @@
 (ns remix-site.views.rhandler
   (:use [remix [rhandler :only [defrh]]]
         [hiccup [def :only [defhtml]] [element :only [link-to]]]
-        [remix-site.views.common :only [layout link-to-ring link-to-compojure link-to-noir clj-snippet]]))
+        [remix-site.views.common :only [layout link-to-ring link-to-compojure link-to-noir link-to-remix clj-snippet]]))
 
 (declare wrap-rhandler-snippet defrh-snippet)
 
@@ -10,7 +10,7 @@
    [:div.container
     [:div.page-header
      [:h1 "rhandler " [:small "Remixed from " (link-to-noir)]]]
-    [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/rhandler.clj" "Machinery") " to define/re-define
+    [:p (link-to-remix "rhandler.clj" "Machinery") " to define/re-define
 route handlers on top of " (link-to-compojure)  "."]
     [:div.row
      [:div.span6

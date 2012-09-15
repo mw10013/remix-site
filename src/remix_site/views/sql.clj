@@ -1,24 +1,20 @@
 (ns remix-site.views.sql
   (:use [remix [rhandler :only [defrh]]]
-        [hiccup [core :only [html]] [def :only [defhtml]] [element :only [link-to]]]
-        [remix-site.views.common :only [layout link-to-mybatis link-to-jdbc clj-snippet]]))
+        [hiccup [core :only [html]] [def :only [defhtml]]]
+        [remix-site.views.common :only [layout layout-snippets link-to-mybatis link-to-jdbc link-to-remix clj-snippet]]))
 
 (defhtml snippet [s1 s2]
   [:p s1]
   [:p (clj-snippet s2)])
-
-(defn- snippets [& args]
-  (for [[p s] (partition 2 args)]
-    (html [:p p] [:p (clj-snippet s)])))
 
 (defrh "/sql" []
   (layout
    [:div.container
     [:div.page-header
      [:h1 "sql" [:small " Remixed from " (link-to-mybatis)]]]
-    [:p (link-to "https://github.com/mw10013/remix/blob/master/src/remix/sql.clj" "Machinery")
+    [:p (link-to-remix "sql.clj" "Machinery")
      " for dynamic sql."]
-    (snippets "
+    (layout-snippets "
 The namespace for dynamic SQL is remix.sql." "
 => (require '(remix [sql :as sql]))"
 
