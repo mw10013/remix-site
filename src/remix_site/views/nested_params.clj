@@ -39,7 +39,7 @@
      [:div.span6
       [:p "Use " [:code "(wrap-nested-params handler)"] " middleware as a drop-in replacement for nested-params in " (link-to-ring) "."]
       [:p "Extends the nested key syntax by accepting parameter names as vectors of keys. Keys may be keywords or integers,
-which will be treated as indexes into nested vectors. If any levels do not exist, hash-maps and vectors will be created."]
+which will be treated as indexes into nested vectors. If any levels does not exist, hash-maps and vectors will be created."]
       [:p "The labels in Kick the Tires below contain examples of this syntax."]]
      [:div.span6 (wrap-nested-params-snippet)]]
     [:div.row     
