@@ -3,10 +3,6 @@
         [hiccup [core :only [html]] [def :only [defhtml]]]
         [remix-site.views.common :only [layout layout-snippets link-to-mybatis link-to-jdbc link-to-remix clj-snippet]]))
 
-(defhtml snippet [s1 s2]
-  [:p s1]
-  [:p (clj-snippet s2)])
-
 (defrh "/sql" []
   (layout
    [:div.container

@@ -5,3 +5,6 @@ pom.xml
 /.lein-failures
 /checkouts
 /.env
+*.log
+remix_test_hsqldb.properties
+remix_test_hsqldb.script
