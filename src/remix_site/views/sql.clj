@@ -60,4 +60,9 @@ The namespace for dynamic SQL is remix.sql." "
 
 "sql/coll builds a collection:"
 "=> (sql/prepare {:coll [\"a\" \"b\" \"c\"]} (sql/sql (sql/coll :coll)))
-[\"('a', 'b', 'c')\"]")]))
+[\"('a', 'b', 'c')\"]"
+
+"sql/param-keys and sql/param-vals put keys and values from the param map into sql."
+"=> (sql/prepare {:a 1 :b 2 :c 3} (sql/sql \"insert into table (pk,\" sql/param-keys \") values (seq.nextval,\" sql/param-vals \")\"))
+[\"insert into table (pk,a,c,b) values (seq.nextval,?,?,?)\" 1 3 2]"
+)]))
