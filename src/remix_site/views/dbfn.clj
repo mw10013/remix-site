@@ -53,4 +53,17 @@ The namespace for dbfn is remix.dbfn" "
 
 "Substitute the values corresponding to the keywords."
 "(d/keywords-only! (fruit-by-name-cost \"kiwi\" 1))
-[\"select * from fruit where name = 'kiwi' and cost = 1\"]")]))
+[\"select * from fruit where name = 'kiwi' and cost = 1\"]"
+
+"Prepare the parameters and transform the results."
+"=> (d/defselect fruit-by-name db
+      (d/argkeys [:name])
+      (d/prepare (fn [m] (update-in m [:name] str \"-1\")))
+      (d/sql \"select name, appearance from fruit where name = :name\")
+      (d/transform (fn [rs] (update-in rs [0 :name] str \"-2\"))))
+=> (fruit-by-name \"watermelon\")
+[{:name \"watermelon-1-2\" :appearance \"pink\"}]"
+
+""
+""
+)]))
