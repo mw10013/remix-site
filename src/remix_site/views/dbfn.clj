@@ -64,6 +64,16 @@ The namespace for dbfn is remix.dbfn" "
 => (fruit-by-name \"watermelon\")
 [{:name \"watermelon-1-2\" :appearance \"pink\"}]"
 
-""
-""
-)]))
+(html "Get the generated key from an insert. Uses param-keys and param-vals from " (link-to "/sql" "sql")  ".")
+"=> (d/definsert insert-generated-key db
+      (d/argkeys [:id :name :appearance])
+      (d/generated-keys [:ID]) ; hsqldb cap rules.
+      (d/sql \"insert into fruit (\" remix.sql/params-keys \") values (\" remix.sql/param-vals \")\"))
+=> (insert-generated-key 1 \"apple\" \"red\")
+[{:id 1}]"
+
+"Insert multiple."
+"=> (d/definsert insert-multiple db
+      (d/sql \"insert into fruit (\" remix.sql/param-keys \") values (\" sql/param-vals \")\"))
+=> (insert-multiple [{:id 1 :name \"apple\" :appearance \"red\"} {:id 2 :name \"orange\" :appearance \"orange\"}])
+(1 1)")]))
