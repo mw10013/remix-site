@@ -14,11 +14,10 @@
                     [:div.container
                      [:div.alert.alert-info "Site still loading. Please try again."]]) req)))
 
-(defroutes routes
-  (resources "/"))
+(defroutes routes (resources "/"))
 
 (def app (-> routes
-             (wrap-rhandler loading-routes "remix-site.views" "remix.slow")
+             (wrap-rhandler loading-routes "remix-site.views")
              wrap-keyword-params
              wrap-nested-params
              wrap-params
