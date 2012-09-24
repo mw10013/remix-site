@@ -5,12 +5,11 @@
 
 (defrh "/sql" []
   (layout
-   [:div.container
-    [:div.page-header
-     [:h1 "sql" [:small " Remixed from " (link-to-mybatis)]]]
-    [:p (link-to-remix "sql.clj" "Machinery")
-     " for dynamic sql."]
-    (layout-snippets "
+   [:div.page-header
+    [:h1 "sql" [:small " Remixed from " (link-to-mybatis)]]]
+   [:p (link-to-remix "sql.clj" "Machinery")
+    " for dynamic sql."]
+   (layout-snippets "
 The namespace for dynamic SQL is remix.sql." "
 => (require '(remix [sql :as sql]))"
 
@@ -25,23 +24,23 @@ The namespace for dynamic SQL is remix.sql." "
 
 "Conditionally include a part of a where clause:"
 "=> (sql/prepare {:title \"the-title\"} (sql/sql \"select * from blog where state = 'ACTIVE'\"
-     (sql/when :title \"and title like :title\")))
+                                                 (sql/when :title \"and title like :title\")))
 [\"select * from blog where state = 'ACTIVE'and title like ?\" \"the-title\"]"
 
 "sql/when takes a predicate of one arg, a parameter map:"
 "=> (sql/prepare {:title \"the-title\"} (sql/sql \"select * from blog where state = 'ACTIVE'\"
-     (sql/when #(:title %) \"and title like :title\")))
+                                                 (sql/when #(:title %) \"and title like :title\")))
 [\"select * from blog where state = 'ACTIVE'and title like ?\" \"the-title\"]"
 
 "sql/where trims the first and/or in the where clause:"
 "=> (sql/prepare {:title \"the-title\"} (sql/sql (sql/where (sql/when :author \"and author = :author\")
-                                                         (sql/when :title \"and title = :title\"))))
+                                                            (sql/when :title \"and title = :title\"))))
 [\" where title = ?\" \"the-title\"]"
 
 "sql/set trims the last comma:"
 "=> (sql/prepare {:title \"the-title\" :author \"clinton\"}
-                  (sql/sql (sql/set (sql/when :title \"title = :title,\")
-                                    (sql/when :author \"author = :author,\"))))
+                 (sql/sql (sql/set (sql/when :title \"title = :title,\")
+                                   (sql/when :author \"author = :author,\"))))
 [\" set title = ?, author = ?\" \"the-title\" \"clinton\"]"
 
 "Using vars:"
@@ -54,8 +53,8 @@ The namespace for dynamic SQL is remix.sql." "
 
 "sql/cond chooses the first non-empty sql string:"
 "=> (sql/prepare {} (sql/sql (sql/cond (sql/when :title \"title = :title\")
-                                      (sql/when :author \"author = :author\")
-                                      \"otherwise\")))
+                                       (sql/when :author \"author = :author\")
+                                       \"otherwise\")))
 [\"otherwise\"]"
 
 "sql/coll builds a collection:"
@@ -65,4 +64,4 @@ The namespace for dynamic SQL is remix.sql." "
 "sql/param-keys and sql/param-vals put keys and values from the param map into sql."
 "=> (sql/prepare {:a 1 :b 2 :c 3} (sql/sql \"insert into table (pk,\" sql/param-keys \") values (seq.nextval,\" sql/param-vals \")\"))
 [\"insert into table (pk,a,c,b) values (seq.nextval,?,?,?)\" 1 3 2]"
-)]))
+)))

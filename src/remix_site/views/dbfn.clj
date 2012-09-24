@@ -5,12 +5,11 @@
 
 (defrh "/dbfn" []
   (layout
-   [:div.container
-    [:div.page-header
-     [:h1 "dbfn" [:small " Remixed from " (link-to-korma)]]]
-    [:p (link-to-remix "dbfn.clj" "Machinery")
-     " for database functions with " (link-to "/sql" "sql") " and " (link-to "/db" "db") "."]
-    (layout-snippets "
+   [:div.page-header
+    [:h1 "dbfn" [:small " Remixed from " (link-to-korma)]]]
+   [:p (link-to-remix "dbfn.clj" "Machinery")
+    " for database functions with " (link-to "/sql" "sql") " and " (link-to "/db" "db") "."]
+   (layout-snippets "
 The namespace for dbfn is remix.dbfn" "
 => (require '(remix [dbfn :as d]))"
 
@@ -76,4 +75,4 @@ The namespace for dbfn is remix.dbfn" "
 "=> (d/definsert insert-multiple db
       (d/sql \"insert into fruit (\" remix.sql/param-keys \") values (\" sql/param-vals \")\"))
 => (insert-multiple [{:id 1 :name \"apple\" :appearance \"red\"} {:id 2 :name \"orange\" :appearance \"orange\"}])
-(1 1)")]))
+(1 1)")))

@@ -8,42 +8,41 @@
 
 (defrh mapper "/mapper" []
   (layout
-   [:div.container
-    [:div.page-header
-     [:h1 "mapper" [:small " Remixed from " (link-to-mybatis)]]]
-    [:p (link-to-remix "mapper.clj" "Machinery")
-     " to map values of maps and reduce result sets to nested maps"]
-    [:h2 "Mappings"]
-    [:div.row
-     [:div.span3
-      [:p [:code "(make-mapping f k & ks)"] " returns a function taking a map. For each k, if the corresponding value
+   [:div.page-header
+    [:h1 "mapper" [:small " Remixed from " (link-to-mybatis)]]]
+   [:p (link-to-remix "mapper.clj" "Machinery")
+    " to map values of maps and reduce result sets to nested maps"]
+   [:h2 "Mappings"]
+   [:div.row
+    [:div.span3
+     [:p [:code "(make-mapping f k & ks)"] " returns a function taking a map. For each k, if the corresponding value
 is not nil, passes it to f and updates the map with the result."]]
-     [:div.span9 (make-mapping-snippet)]]
-    [:div.row
-     [:div.span8 (apply-mappings-snippet)]
-     [:div.span4
-      [:p [:code "(apply-mappings mapping-colls+ x)"] " takes one or more collections of mappings and
+    [:div.span9 (make-mapping-snippet)]]
+   [:div.row
+    [:div.span8 (apply-mappings-snippet)]
+    [:div.span4
+     [:p [:code "(apply-mappings mapping-colls+ x)"] " takes one or more collections of mappings and
 applies them against x, which is either a map or collection of maps."]]]
-    [:div.row
-     [:div.span12
-      [:p [:code "(make-mappings ks & fns)"] " takes a collection of keys and functions. For every function,
+   [:div.row
+    [:div.span12
+     [:p [:code "(make-mappings ks & fns)"] " takes a collection of keys and functions. For every function,
 it makes a mapping for the collection of keys. This is a way to pair up to/from conversion functions.
 Partial up into functions to compose mappings."]
-      [:p (make-mappings-snippet)]
-      [:h2 "reduce-rows"]
-      [:p "Use " [:code "(reduce-rows template rows)"] " to transform a collection of maps
+     [:p (make-mappings-snippet)]
+     [:h2 "reduce-rows"]
+     [:p "Use " [:code "(reduce-rows template rows)"] " to transform a collection of maps
 into nested maps using a template. Can help with the N+1 selects database problem."]]]
-    [:div.row
-     [:div.span4
-      [:p [:code "template"] " is a nested map with the following keys:"
-       [:ul
-        [:li [:code ":row-key"] " key to use in result map."]
-        [:li [:code ":match-val-fn"] " function to match against a row."]
-        [:li [:code ":ks"] " collection of keys to select into the result for matching rows."]
-        [:li [:code ":mappings"] " mappings to apply against values of ks for result."]
-        [:li [:code ":children"] " vector of template maps."]]]]
-     [:div.span8
-      [:p (reduce-rows-snippet)]]]]))
+   [:div.row
+    [:div.span4
+     [:p [:code "template"] " is a nested map with the following keys:"
+      [:ul
+       [:li [:code ":row-key"] " key to use in result map."]
+       [:li [:code ":match-val-fn"] " function to match against a row."]
+       [:li [:code ":ks"] " collection of keys to select into the result for matching rows."]
+       [:li [:code ":mappings"] " mappings to apply against values of ks for result."]
+       [:li [:code ":children"] " vector of template maps."]]]]
+    [:div.span8
+     [:p (reduce-rows-snippet)]]]))
 
 (comment
   [clj-time [local :as ltime] [coerce :as ctime]]

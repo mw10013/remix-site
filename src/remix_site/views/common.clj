@@ -12,7 +12,7 @@
 (defn link-to-valip [] (link-to "https://github.com/weavejester/valip" "Valip"))
 (defn link-to-remix [src content] (link-to (str "https://github.com/mw10013/remix/blob/master/src/remix/" src) content))
 
-(defn layout [content]
+(defn layout [& content]
   (html5 {:lang :en}
    [:head
     [:meta {:charset :utf-8}]
@@ -39,7 +39,6 @@ body {
        (link-to {:class :brand} "/" "Remix")
        [:div.nav-collapse.collapse
         [:ul.nav
-         #_[:li.active (link-to "#home" "Home")]
          [:li (link-to "/rhandler" "rhandler")]
          [:li (link-to "/validate" "validate")]
          [:li (link-to "/nested-params" "nested-params")]
@@ -47,8 +46,10 @@ body {
          [:li (link-to "/sql" "sql")]
          [:li (link-to "/db" "db")]
          [:li (link-to "/dbfn" "dbfn")]]]]]]
-    content]
-   (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")))
+    [:div.container
+     content
+     [:hr]]
+    (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")]))
 
 (defhtml clj-snippet [s] [:pre.prettyprint.lang-clj (h s)])
 
@@ -58,21 +59,20 @@ body {
 
 (defrh "/" []
   (layout
-   [:div.container
-    [:div.hero-unit
-     [:h1 "Remix"]
-     [:p "Mix and match machinery for web and sql."]]
-    [:div.row
-     [:div.span4
-      [:h2 "Machinery"]
-      [:p "Take what you need. Discard the rest. Remix is not a framework. It is machinery that composes well with "
-       (link-to-ring) ", " (link-to-compojure) ", and " (link-to-jdbc) "."]]
-     [:div.span4
-      [:h2 "Prior Art"]
-      [:p "Remixed from the best including " (link-to-noir) ", " (link-to-korma) ", and " (link-to-mybatis) "."]]
-     [:div.span4
-      [:h2 "Context"]
-      [:p (link-to "http://vimeo.com/14912890" "Everything is a remix.")]]]
-    [:div.row
-     [:p {:align :center} (link-to "https://clojars.org/org.clojars.mw10013/remix" "clojars") " |  " (link-to "https://github.com/mw10013/remix" "github")]]]))
+   [:div.hero-unit
+    [:h1 "Remix"]
+    [:p "Mix and match machinery for web and sql."]]
+   [:div.row
+    [:div.span4
+     [:h2 "Machinery"]
+     [:p "Take what you need. Discard the rest. Remix is not a framework. It is machinery that composes well with "
+      (link-to-ring) ", " (link-to-compojure) ", and " (link-to-jdbc) "."]]
+    [:div.span4
+     [:h2 "Prior Art"]
+     [:p "Remixed from the best including " (link-to-noir) ", " (link-to-korma) ", and " (link-to-mybatis) "."]]
+    [:div.span4
+     [:h2 "Context"]
+     [:p (link-to "http://vimeo.com/14912890" "Everything is a remix.")]]]
+   [:div.row
+    [:p {:align :center} (link-to "https://clojars.org/org.clojars.mw10013/remix" "clojars") " |  " (link-to "https://github.com/mw10013/remix" "github")]]))
 

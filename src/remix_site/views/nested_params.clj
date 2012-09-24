@@ -30,24 +30,23 @@
 
 (defrh nested-params "/nested-params" {:keys [params] :as req}
   (layout
-   [:div.container
-    [:div.page-header
-     [:h1 "nested-params " [:small "Remixed from nested-params in " (link-to-ring)]]]
-    [:p (link-to-remix "nested_params.clj" "Machinery")
-     " to convert a single-depth map of parameters to a nested map as ring middleware."]
-    [:div.row
-     [:div.span6
-      [:p "Use " [:code "(wrap-nested-params handler)"] " middleware as a drop-in replacement for nested-params in " (link-to-ring) "."]
-      [:p "Extends the nested key syntax by accepting parameter names as vectors of keys. Keys may be keywords or integers,
+   [:div.page-header
+    [:h1 "nested-params " [:small "Remixed from nested-params in " (link-to-ring)]]]
+   [:p (link-to-remix "nested_params.clj" "Machinery")
+    " to convert a single-depth map of parameters to a nested map as ring middleware."]
+   [:div.row
+    [:div.span6
+     [:p "Use " [:code "(wrap-nested-params handler)"] " middleware as a drop-in replacement for nested-params in " (link-to-ring) "."]
+     [:p "Extends the nested key syntax by accepting parameter names as vectors of keys. Keys may be keywords or integers,
 which will be treated as indexes into nested vectors. If any levels does not exist, hash-maps and vectors will be created."]
-      [:p "The labels in Kick the Tires below contain examples of this syntax."]]
-     [:div.span6 (wrap-nested-params-snippet)]]
-    [:div.row     
-     [:div.span6 (degenerate-case-snippet)]
-     [:div.span6
-      [:p [:span.label.label-important "Important"] " Breaks compatibility with ring's nested-params in the degenerate case."]]]
-    [:h2 "Kick the Tires"]
-    (form params)]))
+     [:p "The labels in Kick the Tires below contain examples of this syntax."]]
+    [:div.span6 (wrap-nested-params-snippet)]]
+   [:div.row     
+    [:div.span6 (degenerate-case-snippet)]
+    [:div.span6
+     [:p [:span.label.label-important "Important"] " Breaks compatibility with ring's nested-params in the degenerate case."]]]
+   [:h2 "Kick the Tires"]
+   (form params)))
 
 (defrh :post "/nested-params-postback" {:keys [params] :as req}
   (nested-params (assoc req :flash params)))
