@@ -12,7 +12,7 @@
   (resources "/")
   (fn [req] (render (layout
                     [:div.container
-                     [:div.alert.alert-info "Still loading site. Please try again."]]) req)))
+                     [:div.alert.alert-info "Site still loading. Please try again."]]) req)))
 
 (defroutes routes
   (resources "/"))
