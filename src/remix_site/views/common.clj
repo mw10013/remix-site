@@ -48,7 +48,8 @@ body {
          [:li (link-to "/dbfn" "dbfn")]]]]]]
     [:div.container
      content
-     [:hr]]
+     [:hr]
+     [:footer [:p "© Michael Wu 2012"]]]
     (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")]))
 
 (defhtml clj-snippet [s] [:pre.prettyprint.lang-clj (h s)])
