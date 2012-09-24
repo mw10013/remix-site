@@ -72,5 +72,7 @@ body {
       [:p "Remixed from the best including " (link-to-noir) ", " (link-to-korma) ", and " (link-to-mybatis) "."]]
      [:div.span4
       [:h2 "Context"]
-      [:p (link-to "http://vimeo.com/14912890" "Everything is a remix.")]]]]))
+      [:p (link-to "http://vimeo.com/14912890" "Everything is a remix.")]]]
+    [:div.row
+     [:p {:align :center} (link-to "https://clojars.org/org.clojars.mw10013/remix" "clojars") " |  " (link-to "https://github.com/mw10013/remix" "github")]]]))
 
