@@ -13,12 +13,16 @@
 The namespace for dbfn is remix.dbfn" "
 => (require '(remix [dbfn :as d]))"
 
-"Define a select starting from a db."
+"Define a select."
 "=> (d/defselect fruit db (d/sql \"select * from fruit\"))"
 
 "And call it."
 "=> (fruit)
 []"
+
+"Browse the resultset."
+"=> (require '(remix [browse :only [browse-resultset]]))
+=> (browse-result (fruit))"
 
 "Define an insert and call it."
 "=> (d/definsert insert-fruit db
