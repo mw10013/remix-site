@@ -52,7 +52,7 @@ body {
      [:footer [:p "© Michael Wu 2012"]]]
     (include-js "/js/jquery.js" "/js/bootstrap.js" "/js/prettify.js" "/js/lang-clj.js")]))
 
-(defhtml clj-snippet [s] [:pre.prettyprint.lang-clj (h s)])
+(defhtml clj-snippet [s] [:pre.prettyprint.lang-clj.linenums (h s)])
 
 (defn layout-snippets [& args]
   (for [[p s] (partition 2 args)]
