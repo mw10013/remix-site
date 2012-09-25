@@ -14,22 +14,37 @@
 
 (defn layout [& content]
   (html5 {:lang :en}
-   [:head
-    [:meta {:charset :utf-8}]
-    [:title "Remix"]
-    [:meta {:name :viewport :content "width=device-width, initial-scale=1.0"}]
-    (include-css "/css/bootstrap.css")
-    [:style {:type "text/css"} "
+         [:head
+          [:meta {:charset :utf-8}]
+          [:title "Remix"]
+          [:meta {:name :viewport :content "width=device-width, initial-scale=1.0"}]
+          (include-css "/css/bootstrap.css")
+          [:style {:type "text/css"} "
 body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
 "]
-    (include-css "/css/bootstrap-responsive.css" "/css/prettify.css")"
+          (include-css "/css/bootstrap-responsive.css" "/css/prettify.css")"
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
   <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
-<![endif]-->"]
+<![endif]-->
+
+<script type=\"text/javascript\">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35063750-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+"]
    [:body {:onload "prettyPrint()"}
     [:div.navbar.navbar-inverse.navbar-fixed-top
      [:div.navbar-inner
