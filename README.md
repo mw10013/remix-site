@@ -1,6 +1,7 @@
 # remix-site
 
-Documentation site for remix.
+Documentation site for remix (https://github.com/mw10013/remix).
+Heroku: http://remix-clojure.herokuapp.com/
 
 ## Usage
 
