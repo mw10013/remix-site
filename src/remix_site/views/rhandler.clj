@@ -12,19 +12,19 @@
    [:p (link-to-remix "rhandler.clj" "Machinery") " to define/re-define
 route handlers on top of " (link-to-compojure)  "."]
    [:div.row
-    [:div.span6
-     [:p "Use " [:code "(wrap-rhandler handler load-handler? & ns-prefixes)"] " middleware to hook into " (link-to-ring) ".
+    [:div.span5
+     [:p "Use " [:code "(wrap-rhandler handler load-handler & ns-prefixes)"] " middleware to hook into " (link-to-ring) ".
 It will dispatch requests to handlers defined by " [:code "defrh"] ". If there is no matching defrh handler, "
       [:code "handler"] " is called."]]
-    [:div.span6 (wrap-rhandler-snippet)]]
+    [:div.span7 (wrap-rhandler-snippet)]]
    [:div.row
     [:div.span9 (wrap-rhandler-slow-snippet)]
     [:div.span3
      [:p "Heroku and GAE insist your site be up relatively quickly. If your views take time to load, specify a "
       [:code "load-handler"] "."]
      [:p "The namespace " [:code "remix.slow.slowpoke"] " takes 45 seconds to load and may be useful in testing your "
-      [:code "load-handler"] "."]]
-    ]
+      [:code "load-handler"] "."]]]
+   [:h2 "defrh"]
    [:p "Define a route handler with " [:code "(defrh name? method? path bindings & body)"] "."]
    [:ul
     [:li "When specified, defn's function called " [:code "name"] " taking a ring request so you can call
@@ -47,7 +47,8 @@ then rhandler is available for remixing."
 (ns remix-site.views.rhandler
   (:use [remix.rhandler :only [wrap-rhandler]]))
 
-(def app (-> routes (wrap-rhandler \"remix-site.views\")
+(def app (-> routes
+             (wrap-rhandler nil \"remix-site.views\")
              site))"))
 
 (defn- wrap-rhandler-slow-snippet []
