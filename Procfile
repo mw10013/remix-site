@@ -1,1 +1,1 @@
-web: lein run -m remix-site.web
+web: lein with-profile production trampoline run -m remix-site.web

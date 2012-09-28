@@ -16,11 +16,12 @@
 
 (defroutes routes (resources "/"))
 
-(def app (-> routes
-             (wrap-rhandler loading-routes "remix-site.views")
-             wrap-keyword-params
-             wrap-nested-params
-             wrap-params
-             wrap-multipart-params
-             wrap-flash
-             wrap-session))
+(defn prepare-app []
+  (def app (-> routes
+               (wrap-rhandler loading-routes "remix-site.views")
+               wrap-keyword-params
+               wrap-nested-params
+               wrap-params
+               wrap-multipart-params
+               wrap-flash
+               wrap-session)))

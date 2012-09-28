@@ -3,6 +3,7 @@
   (:require [remix-site.app :as app]))
 
 (defn -main []
-  (let [port (Integer/parseInt (System/getenv "PORT"))]
-    (run-jetty app/app {:port port})))
+  (app/prepare-app)
+  (run-jetty #'app/app {:port (Integer. (or (System/getenv "PORT") "8080"))}))
 
+; (-main)
