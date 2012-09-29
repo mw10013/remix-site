@@ -26,14 +26,16 @@ The namespace for dbfn is remix.dbfn" "
 
 "Define an insert and call it."
 "=> (d/definsert insert-fruit db
-      (d/sql \"insert into fruit (id, name, appearance) values (:id, :name, :appearance)\"))
+      (d/sql \"insert into fruit (id, name, appearance)
+              values (:id, :name, :appearance)\"))
 => (insert-fruit :id 11 :name \"apple\" :appearance \"red\")
 => (fruit)
 [{:id 11, :name \"apple\", :appearance \"red\", :cost nil, :grade nil}]"
 
 "Update it."
 "=> (d/defupdate update-fruit db
-      (d/sql \"update fruit set name = :name, appearance = :appearance where id = :id\"))
+      (d/sql \"update fruit set name = :name, appearance = :appearance
+              where id = :id\"))
 => (update-fruit :id 11 :name \"orange\" :appearance \"orange\")"
 
 "Delete it"
@@ -71,12 +73,15 @@ The namespace for dbfn is remix.dbfn" "
 "=> (d/definsert insert-generated-key db
       (d/argkeys [:id :name :appearance])
       (d/generated-keys [:ID]) ; hsqldb cap rules.
-      (d/sql \"insert into fruit (\" remix.sql/params-keys \") values (\" remix.sql/param-vals \")\"))
+      (d/sql \"insert into fruit (\" remix.sql/params-keys \")
+              values (\" remix.sql/param-vals \")\"))
 => (insert-generated-key 1 \"apple\" \"red\")
 [{:id 1}]"
 
 "Insert multiple."
 "=> (d/definsert insert-multiple db
-      (d/sql \"insert into fruit (\" remix.sql/param-keys \") values (\" sql/param-vals \")\"))
-=> (insert-multiple [{:id 1 :name \"apple\" :appearance \"red\"} {:id 2 :name \"orange\" :appearance \"orange\"}])
+      (d/sql \"insert into fruit (\" remix.sql/param-keys \")
+              values (\" sql/param-vals \")\"))
+=> (insert-multiple [{:id 1 :name \"apple\" :appearance \"red\"}
+                     {:id 2 :name \"orange\" :appearance \"orange\"}])
 (1 1)")))

@@ -77,7 +77,7 @@ body {
   (layout
    [:div.hero-unit
     [:h1 "Remix"]
-    [:p "Mix and match machinery for web and sql."]]
+    [:p "Mix and match machinery in " (link-to "http://clojure.org/" "Clojure") " for web and sql."]]
    [:div.row
     [:div.span4
      [:h2 "Machinery"]
@@ -90,5 +90,10 @@ body {
      [:h2 "Context"]
      [:p (link-to "http://vimeo.com/14912890" "Everything is a remix.")]]]
    [:div.row
-    [:p {:align :center} (link-to "https://clojars.org/org.clojars.mw10013/remix" "clojars") " |  " (link-to "https://github.com/mw10013/remix" "github")]]))
+    [:div.span12 [:p [:span.label.label-info "Tip"] " If you are a beginner, consider " (link-to-noir) " and "
+                  (link-to-korma) ". Both are wonderful and you may never look back. Later, if you decide you want to work
+closer to the metal, then remix is avilable for remixing."]]]
+   [:div.row
+    [:p {:align :center} (link-to "https://clojars.org/org.clojars.mw10013/remix" "clojars") " |  "
+     (link-to "https://github.com/mw10013/remix" "github")]]))
 

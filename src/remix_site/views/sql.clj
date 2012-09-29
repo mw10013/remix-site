@@ -23,18 +23,21 @@ The namespace for dynamic SQL is remix.sql." "
 [\"select * from table where title = ?\" \"the-title\"]"
 
 "Conditionally include a part of a where clause."
-"=> (sql/prepare {:title \"the-title\"} (sql/sql \"select * from blog where state = 'ACTIVE'\"
-                                                 (sql/when :title \"and title like :title\")))
+"=> (sql/prepare {:title \"the-title\"}
+                 (sql/sql \"select * from blog where state = 'ACTIVE'\"
+                          (sql/when :title \"and title like :title\")))
 [\"select * from blog where state = 'ACTIVE'and title like ?\" \"the-title\"]"
 
 "sql/when takes a predicate of one arg, a parameter map."
-"=> (sql/prepare {:title \"the-title\"} (sql/sql \"select * from blog where state = 'ACTIVE'\"
-                                                 (sql/when #(:title %) \"and title like :title\")))
+"=> (sql/prepare {:title \"the-title\"}
+                 (sql/sql \"select * from blog where state = 'ACTIVE'\"
+                          (sql/when #(:title %) \"and title like :title\")))
 [\"select * from blog where state = 'ACTIVE'and title like ?\" \"the-title\"]"
 
 "sql/where trims the first and/or in the where clause."
-"=> (sql/prepare {:title \"the-title\"} (sql/sql (sql/where (sql/when :author \"and author = :author\")
-                                                            (sql/when :title \"and title = :title\"))))
+"=> (sql/prepare {:title \"the-title\"}
+                 (sql/sql (sql/where (sql/when :author \"and author = :author\")
+                                     (sql/when :title \"and title = :title\"))))
 [\" where title = ?\" \"the-title\"]"
 
 "sql/set trims the last comma."
@@ -47,8 +50,9 @@ The namespace for dynamic SQL is remix.sql." "
 "=> (def cols (sql/sql \"col1, col2, col3\"))
 => (def title (sql/sql \"and title = :title\"))
 => (def ^:const const-val 3)
-=> (sql/prepare {:title \"the-title\"} (sql/sql \"select \" #'cols \" from table\"
-                                                (sql/where title \"and col1 = \" const-val)))
+=> (sql/prepare {:title \"the-title\"}
+                (sql/sql \"select \" #'cols \" from table\"
+                         (sql/where title \"and col1 = \" const-val)))
 [\"select col1, col2, col3  from table where title = ? and col1 =  3\" \"the-title\"]"
 
 "sql/cond chooses the first non-empty sql string."
@@ -62,7 +66,8 @@ The namespace for dynamic SQL is remix.sql." "
 [\"('a', 'b', 'c')\"]"
 
 "sql/param-keys and sql/param-vals put keys and values from the param map into sql."
-"=> (sql/prepare {:a 1 :b 2 :c 3} (sql/sql \"insert into table (pk,\" sql/param-keys \") values (seq.nextval,\" sql/param-vals \")\"))
-[\"insert into table (pk,a,c,b) values (seq.nextval,?,?,?)\" 1 3 2]"
-)))
+"=> (sql/prepare {:a 1 :b 2 :c 3}
+                 (sql/sql \"insert into table (pk,\" sql/param-keys \")
+                           values (seq.nextval,\" sql/param-vals \")\"))
+[\"insert into table (pk,a,c,b) values (seq.nextval,?,?,?)\" 1 3 2]")))
 
