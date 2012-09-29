@@ -19,7 +19,7 @@ The namespace for dynamic SQL is remix.sql." "
 (\"select * from table where title = \" :title)"
 
 "Prepare it with a parameter map."
-"=> (sql/prepare {:title \"the-title\"} sql)
+"=> (sql/prepare {:title \"the-title\"} snippet)
 [\"select * from table where title = ?\" \"the-title\"]"
 
 "Conditionally include a part of a where clause."
