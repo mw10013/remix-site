@@ -12,7 +12,7 @@
 (defn link-to-valip [] (link-to "https://github.com/weavejester/valip" "Valip"))
 (defn link-to-remix [src content] (link-to (str "https://github.com/mw10013/remix/blob/master/src/remix/" src) content))
 
-(defn layout [& content]
+(defn layout [active & content]
   (html5 {:lang :en}
          [:head
           [:meta {:charset :utf-8}]
@@ -54,13 +54,8 @@ body {
        (link-to {:class :brand} "/" "Remix")
        [:div.nav-collapse.collapse
         [:ul.nav
-         [:li (link-to "/rhandler" "rhandler")]
-         [:li (link-to "/validate" "validate")]
-         [:li (link-to "/nested-params" "nested-params")]
-         [:li (link-to "/mapper" "mapper")]
-         [:li (link-to "/sql" "sql")]
-         [:li (link-to "/db" "db")]
-         [:li (link-to "/dbfn" "dbfn")]]]]]]
+         (for [x ["rhandler" "validate" "nested-params" "mapper" "sql" "db" "dbfn"]]
+           [(if (= x active) :li.active :li) (link-to (str "/" x) x)])]]]]]
     [:div.container
      content
      [:hr]
@@ -75,9 +70,11 @@ body {
 
 (defrh "/" []
   (layout
+   nil
    [:div.hero-unit
     [:h1 "Remix"]
-    [:p "Mix and match machinery in " (link-to "http://clojure.org/" "Clojure") " for web and sql."]]
+    [:p "Mix and match machinery in " (link-to "http://clojure.org/" "Clojure") " for web and sql."]
+    [:p (link-to {:class "btn btn-primary btn-large"} "/rhandler" "Learn more &raquo;")]]
    [:div.row
     [:div.span4
      [:h2 "Machinery"]

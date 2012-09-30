@@ -8,6 +8,7 @@
 
 (defrh mapper "/mapper" []
   (layout
+   "mapper"
    [:div.page-header
     [:h1 "mapper" [:small " Remixed from " (link-to-mybatis)]]]
    [:p (link-to-remix "mapper.clj" "Machinery")

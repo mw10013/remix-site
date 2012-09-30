@@ -28,6 +28,7 @@
 
 (defrh validate "/validate" {:keys [params flash errors] :as req}
   (layout
+   "validate"
    [:div.page-header
     [:h1 "validate " [:small "Remixed from " (link-to-valip)]]]
    [:p (link-to-remix "validate.clj" "Machinery ") "to validate a map."]

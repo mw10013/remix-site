@@ -5,6 +5,7 @@
 
 (defrh "/sql" []
   (layout
+   "sql"
    [:div.page-header
     [:h1 "sql" [:small " Remixed from " (link-to-mybatis)]]]
    [:p (link-to-remix "sql.clj" "Machinery")

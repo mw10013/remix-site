@@ -7,6 +7,7 @@
 
 (defrh "/db" []
   (layout
+   "db"
    [:div.page-header
     [:h1 "db" [:small " Remixed from " (link-to-korma)]]]
    [:p (link-to-remix "db.clj" "Machinery")

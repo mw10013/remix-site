@@ -7,6 +7,7 @@
 
 (defrh "/rhandler" []
   (layout
+   "rhandler"
    [:div.page-header
     [:h1 "rhandler " [:small "Remixed from " (link-to-noir)]]]
    [:p (link-to-remix "rhandler.clj" "Machinery") " to define/re-define

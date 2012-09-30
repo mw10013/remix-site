@@ -5,6 +5,7 @@
 
 (defrh "/dbfn" []
   (layout
+   "dbfn"
    [:div.page-header
     [:h1 "dbfn" [:small " Remixed from " (link-to-korma)]]]
    [:p (link-to-remix "dbfn.clj" "Machinery")

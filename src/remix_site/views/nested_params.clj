@@ -30,6 +30,7 @@
 
 (defrh nested-params "/nested-params" {:keys [params] :as req}
   (layout
+   "nested-params"
    [:div.page-header
     [:h1 "nested-params " [:small "Remixed from nested-params in " (link-to-ring)]]]
    [:p (link-to-remix "nested_params.clj" "Machinery")
