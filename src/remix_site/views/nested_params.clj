@@ -33,7 +33,7 @@
    "nested-params"
    [:div.page-header
     [:h1 "nested-params " [:small "Remixed from nested-params in " (link-to-ring)]]]
-   [:p (link-to-remix "nested_params.clj" "Machinery")
+   [:p (link-to-remix "middleware/nested_params.clj" "Machinery")
     " to convert a single-depth map of parameters to a nested map as ring middleware."]
    [:div.row
     [:div.span6
