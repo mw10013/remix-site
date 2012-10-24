@@ -40,7 +40,7 @@ into nested maps using a template. Can help with the N+1 selects database proble
        [:li [:code ":row-key"] " key to use in result map."]
        [:li [:code ":match-val-fn"] " function to match against a row."]
        [:li [:code ":ks"] " collection of keys to select into the result for matching rows."]
-       [:li [:code ":mappings"] " mappings to apply against values of ks for result."]
+       [:li [:code ":transform-fn"] " fn transforming a map of ks for result."]
        [:li [:code ":children"] " vector of template maps."]]]]
     [:div.span8
      [:p (reduce-rows-snippet)]]]))
@@ -67,7 +67,8 @@ into nested maps using a template. Can help with the N+1 selects database proble
     {:row-key :as :match-val-fn :a :ks [:a]
      :children [{:row-key :bs :match-val-fn :b :ks [:b]
                  :children [{:row-key :cs :match-val-fn :c :ks [:c]
-                             :mappings [(m/make-mapping inc :c)]}]}]}
+                             :transform-fn (partial m/apply-mappings
+                                                    [(m/make-mapping inc :c)])}]}]}
      [{:a 1 :b 2 :c 3} {:a 2 :b 2 :c 3}])
 {:as [{:a 1 :bs [{:b 2 :cs [{:c 4}]}]}
       {:a 2 :bs [{:b 2 :cs [{:c 4}]}]}]}

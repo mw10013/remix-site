@@ -4,6 +4,6 @@
 
 (defn -main []
   (app/prepare-app)
-  (run-jetty #'app/app {:port (Integer. (or (System/getenv "PORT") "8080"))}))
+  (run-jetty #'app/app {:port (Integer. (or (System/getenv "PORT") "8080")) :join? false}))
 
 ; (-main)
