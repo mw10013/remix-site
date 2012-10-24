@@ -17,13 +17,18 @@
      [:p "Use " [:code "(create-db db-spec)"] " to create a c3p0 connection pool."]
      [:p [:code "db-spec"] " is a map with the following keys:"]
      [:ul
-      [:li [:code ":datasource-spec"] " for " (link-to-jdbc)
+      [:li [:code ":datasource-spec"] " for " (link-to-jdbc) " containing one of"
        [:ul
-        [:li [:code ":subprotocol"] " jdbc protocol"]
-        [:li [:code ":subname"] " jdbc subname "]
-        [:li [:code ":classname"] " jdbc driver class name"]
-        [:li [:code ":username"]]
-        [:li [:code ":password"]]]]
+        [:li "URI: Parsed JDBC connection string - see string."]
+        [:li "string: subprotocol://user:password@host:port/subname
+                 " [:br] "An optional prefix of jdbc: is allowed."]
+        [:li "map"
+         [:ul
+          [:li [:code ":subprotocol"] " jdbc protocol"]
+          [:li [:code ":subname"] " jdbc subname "]
+          [:li [:code ":classname"] " jdbc driver class name"]
+          [:li [:code ":username"]]
+          [:li [:code ":password"]]]]]]
       [:li [:code ":pool-spec"]
        [:ul
         [:li [:code ":max-idle-time-excess-in-sec"]]
@@ -40,10 +45,7 @@ to db with the db's naming strategy."]]]))
   (clj-snippet "(use 'remix.db)
 (defonce db
   (create-db
-   {:datasource-spec
-    {:classname \"org.hsqldb.jdbcDriver\"
-     :subprotocol \"hsqldb\"
-     :subname \"remix_test_hsqldb\"}
+   {:datasource-spec \"hsql//localhost/remix_test_hsqldb\"
     :pool-spec {:idle-time-excess-in-sec (* 15 60)
                 :idle-time (* 30 60)}
     :naming-strategy
