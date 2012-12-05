@@ -54,7 +54,7 @@ body {
        (link-to {:class :brand} "/" "Remix")
        [:div.nav-collapse.collapse
         [:ul.nav
-         (for [x ["rhandler" "validate" "nested-params" "mapper" "sql" "db" "dbfn"]]
+         (for [x ["rhandler" "validate" "nested-params" "mapper" "sql" "db" "dbfn" "bootstrap"]]
            [(if (= x active) :li.active :li) (link-to (str "/" x) x)])]]]]]
     [:div.container
      content
