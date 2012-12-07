@@ -10,15 +10,13 @@
 
 (defhtml form [params errors flash]
   (form-to {:class :form-horizontal} [:post "/validate-postback"]
-           #_(when flash (html [:div.alert.alert-success.fade.in
-                              [:button.close {:type :button :data-dismiss :alert} "x"]
-                                flash]))
-           (when flash (bs/alert {:content flash :class "alert-success fade in"}))
-             (bs/control-group :name "Name" errors (text-field :name (:name params)))
-             (bs/control-group :password "Password" errors (password-field :password (:password params)))
-             (bs/control-group :confirm-password "Confirm Password" errors (password-field :confirm-password (:confirm-password params)))
-             (bs/control-group :fav-num "Favorite Number" errors (text-field :fav-num (:fav-num params)))
-             (bs/control-actions (submit-button {:class "btn btn-primary"} "Submit"))))
+           (when flash flash)
+           (bs/control-group :name "Name" errors (text-field :name (:name params)))
+           (bs/control-group :password "Password" errors (password-field :password (:password params)))
+           (bs/control-group :confirm-password "Confirm Password" errors (password-field
+                                                                          :confirm-password (:confirm-password params)))
+           (bs/control-group :fav-num "Favorite Number" errors (text-field :fav-num (:fav-num params)))
+           (bs/control-actions (submit-button {:class "btn btn-primary"} "Submit"))))
 
 (defrh validate "/validate" {:keys [params flash errors] :as req}
   (layout
@@ -48,7 +46,7 @@ If " [:code "predicate"] " returns falsy, " [:code "error"] " is added to the er
                              [identity :password #(apply = (map % [:password :confirm-password])) "Passwords must match."]]
                             [:fav-num #(or (blank? %) (try (Double. %) (catch Exception _ false))) "Invalid number."])]
     (validate (assoc req :errors errors))
-    (validate (assoc req :errors nil :flash "Valid."))))
+    (validate (assoc req :errors nil :flash (bs/alert {:class "alert-success fade in"} "Valid.")))))
 
 (defn- validate-snippet []
   (clj-snippet "

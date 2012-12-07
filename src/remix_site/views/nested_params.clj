@@ -1,4 +1,5 @@
 (ns remix-site.views.nested-params
+  (:require [remix.bootstrap :as bs])
   (:use [clojure.pprint :only [pprint]]
         [remix [rhandler :only [defrh]]]
         [hiccup [core :only [html h]] [def :only [defhtml]] [form :only [form-to submit-button label text-field]]]
@@ -12,12 +13,16 @@
    [:div.controls
     (text-field path (get-in params path))]])
 
+(defhtml field [path params]
+  (bs/control-group*
+   (label {:class :control-label :for path} path (str \[ (apply str (interpose "&nbsp;" path)) \]))
+   (text-field path (get-in params path)) nil nil))
+
 (defhtml form [params]
   (form-to {:class :form-horizontal} [:post "/nested-params-postback"]
            (when (:as params)
-             (html [:div.alert.alert-info.fade.in
-                    [:button.close {:type :button :data-dismiss :alert} "x"]
-                    (clj-snippet (-> params (select-keys [:as]) pprint with-out-str))]))
+             (bs/alert {:class "alert-info fade in"}
+                       (clj-snippet (-> params (select-keys [:as]) pprint with-out-str))))
            (field [:as 0 :id] params)
            (field [:as 0 :bs 0 :id] params)
            (field [:as 0 :bs 1 :id] params)
@@ -25,8 +30,7 @@
            (field [:as 0 :bs 0 :cs 1 :id] params)
            (field [:as 0 :bs 1 :cs 0 :id] params)
            (field [:as 2 :bs 2 :cs 2 :id] params)
-           [:div.form-actions
-            (submit-button {:class "btn btn-primary"} "Submit")]))
+           (bs/control-actions (submit-button {:class "btn btn-primary"} "Submit"))))
 
 (defrh nested-params "/nested-params" {:keys [params] :as req}
   (layout
@@ -49,8 +53,7 @@ which will be treated as indexes into nested vectors. If any levels does not exi
    [:h2 "Kick the Tires"]
    (form params)))
 
-(defrh :post "/nested-params-postback" {:keys [params] :as req}
-  (nested-params (assoc req :flash params)))
+(defrh :post "/nested-params-postback" req (nested-params req))
 
 (defn- wrap-nested-params-snippet []
   (clj-snippet "(ns remix-site.app
