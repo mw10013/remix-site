@@ -49,9 +49,9 @@ to db with the db's naming strategy."]]]))
     :pool-spec {:idle-time-excess-in-sec (* 15 60)
                 :idle-time (* 30 60)}
     :naming-strategy
-    {:keys #(-> % clojure.string/lower-case
+    {:keyword #(-> % clojure.string/lower-case
                 (clojure.string/replace \\_ \\-))
-     :fields #(clojure.string/replace % \\- \\_)}}))"))
+     :entity #(clojure.string/replace % \\- \\_)}}))"))
 
 (defn- with-db-snippet []
   (clj-snippet "(with-db db
