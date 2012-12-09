@@ -82,7 +82,7 @@ The namespace for dbfn is remix.dbfn" "
 "Insert multiple."
 "=> (d/definsert insert-multiple db
       (d/sql \"insert into fruit (\" remix.sql/param-keys \")
-              values (\" sql/param-vals \")\"))
+              values (\" remix.sql/param-vals \")\"))
 => (insert-multiple [{:id 1 :name \"apple\" :appearance \"red\"}
                      {:id 2 :name \"orange\" :appearance \"orange\"}])
 (1 1)")))
